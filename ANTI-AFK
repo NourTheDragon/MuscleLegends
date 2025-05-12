@@ -15,11 +15,16 @@ label.BorderSizePixel = 0                                -- No border for a flat
 label.Position = UDim2.new(0.7, 0, 0.1, 0)
 label.Size = UDim2.new(0, 140, 0, 50)
 label.Font = Enum.Font.GothamBold                        -- Cleaner font
-label.Text = '<font color="#00BFFF">Anti AFK</font>\n<font color="#50FA7B"><b>Active</b></font>'
---label.TextColor3 = Color3.fromRGB(80, 250, 123)          -- Soft green
+label.TextColor3 = Color3.fromRGB(80, 250, 123)          -- Soft green
 label.TextStrokeTransparency = 0.8                       -- Slight text outline for clarity
 label.TextSize = 16
 label.TextWrapped = true
+
+label.Text = [[
+<font color="#00BFFF">Anti AFK</font>
+<br/>
+<font color="#50FA7B"><b>Active</b></font>
+]]
 
 -- Anti-AFK Function
 local vu = game:service("VirtualUser")
