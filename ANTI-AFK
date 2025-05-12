@@ -7,7 +7,7 @@ gui.Parent = game.CoreGui
 
 -- Container Frame
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 120, 0, 40)
+frame.Size = UDim2.new(0, 70, 0, 40)
 frame.Position = UDim2.new(0.7, 0, 0.1, 0)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
@@ -23,7 +23,7 @@ title.Position = UDim2.new(0, 0, 0, 0)
 title.BackgroundTransparency = 1
 title.Text = "مانع الطرد"
 title.Font = Enum.Font.GothamBold
-title.TextSize = 16
+title.TextSize = 20
 title.TextColor3 = Color3.fromRGB(0, 191, 255) -- DeepSkyBlue
 
 -- Line 2: Active
@@ -34,7 +34,7 @@ status.Position = UDim2.new(0, 0, 0.5, 0)
 status.BackgroundTransparency = 1
 status.Text = "نشط"
 status.Font = Enum.Font.GothamBold
-status.TextSize = 16
+status.TextSize = 22
 status.TextColor3 = Color3.fromRGB(80, 250, 123) -- Green
 
 -- Anti-AFK function
