@@ -40,10 +40,10 @@ Fourth Page: Gaining Power
   - auto train situps
 
   (add here top 4x machines)
-  [Strength ONLY]
+  (Strength ONLY)
   - Auto Strength (do an autmated process to go to machine, hold it, start training)
   - Auto Strength in muscle king (like above)
-  [Strength & Durabililty]
+  (Strength & Durabililty)
   - Auto Strength (do an autmated process to go to machine, hold it, start training)
   - Auto Strength in muscle king (like above)
 
@@ -59,12 +59,40 @@ Five Page: Killing
   - (Kill evil karma)?
   - (kill good karma)?
 
-Six Page: PACK ONLY
-  [Strength]
-  - teleport
+Six Page: PACKs
+  - Hide Frames
+  - Lock Position
 
-  [Rebirth]
-  - 
+  (Speed Grind)
+  - Speed Grind on Machine
+  - Speed Grind auto machine
+
+  (Rebirth)
+    (Only Packs)
+    - Auto Rebirth
+    - Auto Rebirth to target.
+
+    (Rebirth with glitches and packs)
+    - auto rebirth :3 
+
+Seventh Page: Stats
+  + all the stats needed
+
+eightth page: Preformance:
+  - no fog
+  - no shadow ...
+    
+ninth page: pets
+  - purchasing pets
+  - purchasing aura
+
+tenth page: items
+  - empty item bag (all)
+  - empty only pineapple
+  - empty only drinks (make user chooses what to empty)
+
+eleventh page: 
+- anti afk
 
 
 
