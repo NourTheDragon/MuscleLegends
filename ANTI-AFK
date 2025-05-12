@@ -10,13 +10,13 @@ gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 label.Parent = gui
 label.Active = true
 label.Draggable = true
-label.BackgroundColor3 = Color3.fromRGB(30, 30, 30)      -- Dark gray background
+label.BackgroundColor3 = Color3.fromRGB(25, 25, 25)      -- Dark gray background
 label.BorderSizePixel = 0                                -- No border for a flat look
 label.Position = UDim2.new(0.7, 0, 0.1, 0)
-label.Size = UDim2.new(0, 120, 0, 35)
+label.Size = UDim2.new(0, 140, 0, 50)
 label.Font = Enum.Font.GothamBold                        -- Cleaner font
-label.Text = "Anti AFK\nActive"
-label.TextColor3 = Color3.fromRGB(80, 250, 123)          -- Soft green
+label.Text = '<font color="#00BFFF">Anti AFK</font>\n<font color="#50FA7B"><b>Active</b></font>'
+--label.TextColor3 = Color3.fromRGB(80, 250, 123)          -- Soft green
 label.TextStrokeTransparency = 0.8                       -- Slight text outline for clarity
 label.TextSize = 16
 label.TextWrapped = true
