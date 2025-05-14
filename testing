@@ -15,7 +15,7 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local player = Players.LocalPlayer
 
 -- Create window
-local window = library:AddWindow("Nour | The Dragon 🐉♥️", {
+local window = library:AddWindow("a Nour | The Dragon 🐉♥️", {
     main_color = Color3.fromRGB(66, 164, 115),
     min_size = Vector2.new(700, 900),
     can_resize = true,
