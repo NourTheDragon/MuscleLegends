@@ -1071,3 +1071,13 @@ tabs.testing:AddSwitch("TESTING", function(enabled)
 
     end
 end)
+
+local closeTab = window:AddTab("❌ Close")
+closeTab:AddButton("Close GUI", function()
+    local coreGui = game:GetService("CoreGui")
+    for _, v in pairs(coreGui:GetChildren()) do
+        if v:IsA("ScreenGui") and v.Name:find("Elerium") then
+            v:Destroy()
+        end
+    end
+end)
