@@ -1072,14 +1072,17 @@ tabs.testing:AddSwitch("TESTING", function(enabled)
 
         task.wait(3)
 
-
         TequipPetFromFolder("Unique", "Cool Guy Larry")
+
+        task.wait(3)
+
+        TunequipAllPets()
 
         task.wait(3)
 
         TequipSavedPets()
 
-    end
+    end)
 end)
 
 local closeTab = window:AddTab("❌ Close")
