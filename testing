@@ -1032,6 +1032,16 @@ local function TsaveCurrentPets()
     end
 end
 
+local function TequipPetFromFolder(folderName, petName)
+    local folder = player.petsFolder:FindFirstChild(folderName)
+    if folder then
+        for _, pet in ipairs(folder:GetChildren()) do
+            if pet.Name == petName then
+                ReplicatedStorage.rEvents.equipPetEvent:FireServer("equipPet", pet)
+            end
+        end
+    end
+end
 
 local function TunequipAllPets()
     local petsFolder = player:WaitForChild("petsFolder")
