@@ -1,0 +1,147 @@
+-- Services
+local Players = game:GetService("Players")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local player = Players.LocalPlayer
+
+-- State
+local AutoEggEnabled = false
+local EggCount = 0
+local EGG_INTERVAL = 1800 -- 30 minutes
+
+-- GUI Setup
+local screenGui = Instance.new("ScreenGui", game.CoreGui)
+screenGui.Name = "واجهةالبيض"
+screenGui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame", screenGui)
+frame.Size = UDim2.new(0, 160, 0, 140)
+frame.Position = UDim2.new(0.8, 0, 0.5, -70)
+frame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+
+local uiCorner = Instance.new("UICorner", frame)
+uiCorner.CornerRadius = UDim.new(0, 14)
+
+-- Title Bar
+local titleBar = Instance.new("TextLabel", frame)
+titleBar.Size = UDim2.new(1, -30, 0, 30)
+titleBar.Position = UDim2.new(0, 10, 0, 0)
+titleBar.BackgroundTransparency = 1
+titleBar.Text = "🍳 البيض التلقائي"
+titleBar.TextColor3 = Color3.new(1, 1, 1)
+titleBar.Font = Enum.Font.GothamBold
+titleBar.TextSize = 16
+titleBar.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Close Button
+local closeButton = Instance.new("TextButton", frame)
+closeButton.Size = UDim2.new(0, 20, 0, 20)
+closeButton.Position = UDim2.new(1, -25, 0, 5)
+closeButton.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+closeButton.Text = "X"
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Font = Enum.Font.GothamBold
+closeButton.TextSize = 14
+closeButton.MouseButton1Click:Connect(function()
+    AutoEggEnabled = false
+    screenGui:Destroy()
+end)
+
+-- Toggle Button
+local toggleButton = Instance.new("TextButton", frame)
+toggleButton.Size = UDim2.new(0.9, 0, 0, 35)
+toggleButton.Position = UDim2.new(0.05, 0, 0, 35)
+toggleButton.BackgroundColor3 = Color3.fromRGB(140, 0, 0)
+toggleButton.TextColor3 = Color3.new(1, 1, 1)
+toggleButton.Font = Enum.Font.GothamBold
+toggleButton.TextSize = 14
+toggleButton.Text = "تشغيل البيض: متوقف"
+
+-- Labels
+local counterLabel = Instance.new("TextLabel", frame)
+counterLabel.Size = UDim2.new(0.9, 0, 0, 25)
+counterLabel.Position = UDim2.new(0.05, 0, 0, 75)
+counterLabel.BackgroundTransparency = 0.5
+counterLabel.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+counterLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+counterLabel.Font = Enum.Font.Gotham
+counterLabel.TextSize = 13
+counterLabel.Text = "🍽️ عدد المرات: 0"
+counterLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local inventoryLabel = Instance.new("TextLabel", frame)
+inventoryLabel.Size = UDim2.new(0.9, 0, 0, 25)
+inventoryLabel.Position = UDim2.new(0.05, 0, 0, 105)
+inventoryLabel.BackgroundTransparency = 0.5
+inventoryLabel.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+inventoryLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+inventoryLabel.Font = Enum.Font.Gotham
+inventoryLabel.TextSize = 13
+inventoryLabel.Text = "🎒 في الحقيبة: ..."
+inventoryLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Egg Inventory Update
+local function updateInventoryCount()
+    local count = 0
+    for _, item in ipairs(player.Backpack:GetChildren()) do
+        if item.Name == "Protein Egg" then
+            count += 1
+        end
+    end
+    inventoryLabel.Text = "🎒 في الحقيبة: " .. count
+end
+
+task.spawn(function()
+    while screenGui.Parent do
+        updateInventoryCount()
+        task.wait(10)
+    end
+end)
+
+-- Egg Use Logic
+local function useProteinEgg()
+    local proteinEgg = player.Backpack:FindFirstChild("Protein Egg")
+    if proteinEgg then
+        proteinEgg.Parent = player.Character
+        for i = 1, 5 do
+            VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
+            task.wait()
+            VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
+            task.wait(0.1)
+        end
+        EggCount += 1
+        counterLabel.Text = "🍽️ عدد المرات: " .. EggCount
+        updateInventoryCount()
+    else
+        warn("[البيض التلقائي] لا توجد بيضات حالياً.")
+    end
+end
+
+-- Background Loop
+task.spawn(function()
+    while true do
+        if AutoEggEnabled then
+            useProteinEgg()
+            for i = EGG_INTERVAL, 1, -1 do
+                if not AutoEggEnabled then break end
+                task.wait(1)
+            end
+        else
+            task.wait(1)
+        end
+    end
+end)
+
+-- Toggle Logic
+toggleButton.MouseButton1Click:Connect(function()
+    AutoEggEnabled = not AutoEggEnabled
+    if AutoEggEnabled then
+        toggleButton.BackgroundColor3 = Color3.fromRGB(0, 170, 80)
+        toggleButton.Text = "تشغيل البيض: مفعل"
+    else
+        toggleButton.BackgroundColor3 = Color3.fromRGB(140, 0, 0)
+        toggleButton.Text = "تشغيل البيض: متوقف"
+    end
+end)
