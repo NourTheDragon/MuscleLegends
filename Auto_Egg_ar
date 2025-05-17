@@ -33,7 +33,7 @@ titleBar.Text = "🍳 البيض التلقائي"
 titleBar.TextColor3 = Color3.new(1, 1, 1)
 titleBar.Font = Enum.Font.GothamBold
 titleBar.TextSize = 16
-titleBar.TextXAlignment = Enum.TextXAlignment.Left
+titleBar.TextXAlignment = Enum.TextXAlignment.Center
 
 -- Close Button
 local closeButton = Instance.new("TextButton", frame)
@@ -69,7 +69,7 @@ counterLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 counterLabel.Font = Enum.Font.Gotham
 counterLabel.TextSize = 13
 counterLabel.Text = "🍽️ عدد المرات: 0"
-counterLabel.TextXAlignment = Enum.TextXAlignment.Left
+counterLabel.TextXAlignment = Enum.TextXAlignment.Right
 
 local inventoryLabel = Instance.new("TextLabel", frame)
 inventoryLabel.Size = UDim2.new(0.9, 0, 0, 25)
@@ -80,7 +80,7 @@ inventoryLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 inventoryLabel.Font = Enum.Font.Gotham
 inventoryLabel.TextSize = 13
 inventoryLabel.Text = "🎒 في الحقيبة: ..."
-inventoryLabel.TextXAlignment = Enum.TextXAlignment.Left
+inventoryLabel.TextXAlignment = Enum.TextXAlignment.Right
 
 -- Egg Inventory Update
 local function updateInventoryCount()
