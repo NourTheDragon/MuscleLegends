@@ -43,7 +43,34 @@ counterLabel.Font = Enum.Font.Gotham
 counterLabel.TextSize = 14
 counterLabel.Text = "Eggs Eaten: 0"
 
--- Egg Usage Logic
+local inventoryLabel = Instance.new("TextLabel", frame)
+inventoryLabel.Size = UDim2.new(0, 180, 0, 20)
+inventoryLabel.Position = UDim2.new(0, 10, 0, 80)
+inventoryLabel.BackgroundTransparency = 1
+inventoryLabel.TextColor3 = Color3.new(1, 1, 1)
+inventoryLabel.Font = Enum.Font.Gotham
+inventoryLabel.TextSize = 13
+inventoryLabel.Text = "Inventory Eggs: ..."
+
+-- Update function
+local function updateInventoryCount()
+	local count = 0
+	for _, item in ipairs(player.Backpack:GetChildren()) do
+		if item.Name == "Protein Egg" then
+			count += 1
+		end
+	end
+	inventoryLabel.Text = "Inventory Eggs: " .. count
+end
+
+-- Auto update egg count every 10 seconds
+task.spawn(function()
+	while true do
+		updateInventoryCount()
+		task.wait(10)
+	end
+end)
+
 local function useProteinEgg()
 	local proteinEgg = player.Backpack:FindFirstChild("Protein Egg")
 	if proteinEgg then
@@ -56,6 +83,9 @@ local function useProteinEgg()
 		end
 		EggCount += 1
 		counterLabel.Text = "Eggs Eaten: " .. EggCount
+		updateInventoryCount()
+	else
+		warn("[Auto Egg] No Protein Egg found in inventory.")
 	end
 end
 
