@@ -1,0 +1,82 @@
+--// Services
+local Players = game:GetService("Players")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local player = Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+
+--// Variables
+local AutoEggEnabled = false
+local EggCount = 0
+local EGG_INTERVAL = 1800 -- 30 minutes
+
+--// GUI Setup
+local screenGui = Instance.new("ScreenGui", game.CoreGui)
+screenGui.Name = "ProteinEggGUI"
+screenGui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame", screenGui)
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+
+local uiCorner = Instance.new("UICorner", frame)
+uiCorner.CornerRadius = UDim.new(0, 8)
+
+local toggleButton = Instance.new("TextButton", frame)
+toggleButton.Size = UDim2.new(0, 180, 0, 35)
+toggleButton.Position = UDim2.new(0, 10, 0, 10)
+toggleButton.BackgroundColor3 = Color3.fromRGB(66, 164, 115)
+toggleButton.TextColor3 = Color3.new(1, 1, 1)
+toggleButton.Font = Enum.Font.GothamBold
+toggleButton.TextSize = 14
+toggleButton.Text = "Auto Egg: OFF"
+
+local counterLabel = Instance.new("TextLabel", frame)
+counterLabel.Size = UDim2.new(0, 180, 0, 25)
+counterLabel.Position = UDim2.new(0, 10, 0, 55)
+counterLabel.BackgroundTransparency = 1
+counterLabel.TextColor3 = Color3.new(1, 1, 1)
+counterLabel.Font = Enum.Font.Gotham
+counterLabel.TextSize = 14
+counterLabel.Text = "Eggs Eaten: 0"
+
+--// Egg Usage Logic
+local function useProteinEgg()
+	local proteinEgg = player.Backpack:FindFirstChild("Protein Egg")
+	if proteinEgg then
+		proteinEgg.Parent = player.Character
+		for i = 1, 5 do
+			VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 1)
+			task.wait()
+			VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 1)
+			task.wait(0.1)
+		end
+		EggCount += 1
+		counterLabel.Text = "Eggs Eaten: " .. EggCount
+	end
+end
+
+--// Background Loop
+task.spawn(function()
+	while true do
+		if AutoEggEnabled then
+			useProteinEgg()
+			for i = EGG_INTERVAL, 1, -1 do
+				if not AutoEggEnabled then break end
+				task.wait(1)
+			end
+		else
+			task.wait(1)
+		end
+	end
+end)
+
+--// Toggle Button Logic
+toggleButton.MouseButton1Click:Connect(function()
+	AutoEggEnabled = not AutoEggEnabled
+	toggleButton.Text = "Auto Egg: " .. (AutoEggEnabled and "ON" or "OFF")
+	toggleButton.BackgroundColor3 = AutoEggEnabled and Color3.fromRGB(85, 200, 85) or Color3.fromRGB(66, 164, 115)
+end)
