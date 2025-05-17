@@ -1,15 +1,15 @@
---// Services
+-- Services
 local Players = game:GetService("Players")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local player = Players.LocalPlayer
 local TweenService = game:GetService("TweenService")
 
---// Variables
+-- Variables
 local AutoEggEnabled = false
 local EggCount = 0
 local EGG_INTERVAL = 1800 -- 30 minutes
 
---// GUI Setup
+-- GUI Setup
 local screenGui = Instance.new("ScreenGui", game.CoreGui)
 screenGui.Name = "ProteinEggGUI"
 screenGui.ResetOnSpawn = false
@@ -43,7 +43,7 @@ counterLabel.Font = Enum.Font.Gotham
 counterLabel.TextSize = 14
 counterLabel.Text = "Eggs Eaten: 0"
 
---// Egg Usage Logic
+-- Egg Usage Logic
 local function useProteinEgg()
 	local proteinEgg = player.Backpack:FindFirstChild("Protein Egg")
 	if proteinEgg then
@@ -59,7 +59,7 @@ local function useProteinEgg()
 	end
 end
 
---// Background Loop
+-- Background Loop
 task.spawn(function()
 	while true do
 		if AutoEggEnabled then
@@ -74,7 +74,7 @@ task.spawn(function()
 	end
 end)
 
---// Toggle Button Logic
+-- Toggle Button Logic
 toggleButton.MouseButton1Click:Connect(function()
 	AutoEggEnabled = not AutoEggEnabled
 	toggleButton.Text = "Auto Egg: " .. (AutoEggEnabled and "ON" or "OFF")
