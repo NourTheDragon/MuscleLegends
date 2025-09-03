@@ -1303,44 +1303,60 @@ local packFarm = rebirth:AddSwitch("Pack Farm", function(bool)
             task.wait(0.1)
             equipUniquePet("Swift Samurai")
  
-            -- STRENGTH GAINING WITH SPEED MODES
+            -- Replace the strength gaining section in your Pack Farm with this:
+
             if packFarmSpeedMode == "Safe" then
-                -- Safe Mode: Original speed with small batches
+                -- Moderate speed with consistent performance
                 while isRunning and player.leaderstats.Strength.Value < rebirthCost do
-                    for i = 1, 10 do
+                    for i = 1, 25 do
                         player.muscleEvent:FireServer("rep")
-                    end
-                    task.wait(0.1)
-                end
-                
-            elseif packFarmSpeedMode == "Fast" then
-                -- Fast Mode: Parallel coroutines
-                while isRunning and player.leaderstats.Strength.Value < rebirthCost do
-                    for i = 1, 20 do
-                        task.spawn(function()
-                            player.muscleEvent:FireServer("rep")
-                        end)
                     end
                     task.wait(0.05)
                 end
                 
+            elseif packFarmSpeedMode == "Fast" then
+                -- Fast mode with stagger to prevent throttling
+                while isRunning and player.leaderstats.Strength.Value < rebirthCost do
+                    -- Send in waves with micro-delays
+                    for batch = 1, 3 do
+                        for i = 1, 15 do
+                            task.spawn(function()
+                                player.muscleEvent:FireServer("rep")
+                            end)
+                        end
+                        task.wait(0.01) -- Micro delay between batches
+                    end
+                    task.wait(0.03) -- Small cooldown to prevent server throttle
+                end
+                
             elseif packFarmSpeedMode == "Extreme" then
-                -- Extreme Mode: Maximum speed with RenderStepped
-                local renderConnection
-                renderConnection = game:GetService("RunService").RenderStepped:Connect(function()
-                    if not isRunning or player.leaderstats.Strength.Value >= rebirthCost then
-                        renderConnection:Disconnect()
-                        return
+                -- Extreme mode with anti-stuck mechanism
+                local stuckCounter = 0
+                local lastStrength = player.leaderstats.Strength.Value
+                
+                while isRunning and player.leaderstats.Strength.Value < rebirthCost do
+                    -- Send massive batch
+                    for i = 1, 50 do
+                        task.spawn(function()
+                            player.muscleEvent:FireServer("rep")
+                        end)
                     end
                     
-                    for i = 1, 5 do
-                        player.muscleEvent:FireServer("rep")
+                    -- Anti-stuck check
+                    task.wait(0.02)
+                    
+                    -- Check if strength is increasing
+                    if player.leaderstats.Strength.Value <= lastStrength + 5M then
+                        stuckCounter = stuckCounter + 1
+                        if stuckCounter > 10 then
+                            -- Reset the connection if stuck
+                            task.wait(0.5) -- Brief pause to reset
+                            stuckCounter = 0
+                        end
+                    else
+                        stuckCounter = 0
+                        lastStrength = player.leaderstats.Strength.Value
                     end
-                end)
-                
-                -- Wait until strength requirement is met
-                while isRunning and player.leaderstats.Strength.Value < rebirthCost do
-                    task.wait(0.1)
                 end
             end
  
