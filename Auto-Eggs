@@ -6,7 +6,7 @@ local player = game.Players.LocalPlayer
 local displayName = player.DisplayName or player.Name
 
 -- VENTANA PRINCIPAL
-local window = library:AddWindow(" س̶ك̶ر̶ب̶ت̶ ̶ك̶ل̶ا̶ن̶ ̶د̶ي̶ف̶ل̶🔥تم الاختراق عن طريق مونستر| منور " .. displayName, {
+local window = library:AddWindow("Naif سكربت كلان ديفل🔥 تم الاختراق عن طريق مونستر 👹👹 | منور ", {
     main_color = Color3.fromRGB(34, 56, 34),
     min_size = Vector2.new(550, 820),
     can_resize = false,
@@ -4503,7 +4503,7 @@ Gift:AddButton(
 
 local Credits = window:AddTab("Credits")
 
-Credits:AddLabel("تم التهكير🔥  ̶سك̶ر̶ب̶ت̶ ̶ك̶ل̶ا̶ن̶ ̶د̶ي̶ف̶ل̶")
-Credits:AddLabel("  ̶ت̶م̶ ̶ا̶ل̶ت̶ع̶ا̶و̶ن̶ ̶ي̶و̶س̶ف̶ ̶و̶ ̶ف̶ه̶د💪تم الدعسسس")
+Credits:AddLabel("تم التهكير 🔥 سكربت كلان ديفل")
+Credits:AddLabel(" 💩تم التعاون يوسف💩 و فهد💪")
 Credits:AddLabel("كلان مونستر")
 Credits:AddLabel("👹👹👹👹👹👹")
